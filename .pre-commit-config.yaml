@@ -18,3 +18,9 @@ repos:
       - id: black
         args: ["--config", "black.toml"]
         stages: [commit]
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+        stages: [commit]
