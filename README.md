@@ -76,7 +76,7 @@ This project aims to develop a robust and scalable backend for an online course 
 
 The following ER diagram shows the database schema for the application:
 
-![ER Diagram](./Conceitual_bd1.png)
+![ER Diagram](./docs/Conceitual_bd1.png)
 
 ## 4. Development Setup
 
