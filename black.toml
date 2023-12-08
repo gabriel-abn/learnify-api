@@ -1,11 +1,11 @@
 [black]
-target-version = ['py36', 'py37', 'py38', 'py39', 'py310', 'py311', 'py312']
+target-version = ["py36", "py37", "py38", "py39", "py310", "py311", "py312"]
 line-length = 88
 indent-width = 4
-include = '\.py$'
+include = "*.py$"
 exclude = """
 (
-\.eggs
+*.eggs
 | venv
 | #
 )
