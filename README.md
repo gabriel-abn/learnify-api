@@ -1,6 +1,6 @@
 # Learnify
 
-This document provides an overview of the backend for an online course platform application.
+This document provides an overview of the backend for an online course platform application. This is a project for the discipline **Databases** at the **[Federal University of Ouro Preto](https://ufop.br)**.
 
 - [Learnify](#learnify)
   - [1. Project Overview](#1-project-overview)
@@ -82,7 +82,7 @@ The following ER diagram shows the database schema for the application:
 
 To set up the development environment, please follow these steps:
 
-To be added.
+`To be added.`
 
 ## 5. API Documentation
 
