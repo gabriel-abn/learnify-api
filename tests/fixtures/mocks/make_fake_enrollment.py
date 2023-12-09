@@ -1,18 +1,25 @@
-from typing import Optional
+from faker import Faker
 
 from src.domain.entities import Enrollment, EnrollmentProps
+from src.domain.entities.course import Course
+from tests.fixtures.mocks import make_fake_course
+
+faker = Faker()
 
 
-def make_fake_enrollment(props: Optional[EnrollmentProps]) -> Enrollment:
+def make_fake_enrollment(
+    enrollment_id: str = faker.uuid4(),
+    student_id: str = faker.uuid4(),
+    course: Course = make_fake_course(),
+    enrollment_date: str = faker.date_object(),
+    rating: int = faker.pyint(),
+) -> Enrollment:
     enrollment_props: EnrollmentProps = {
-        "enrollment_id": "any_id",
-        "student_id": "any_id",
-        "course_id": "any_id",
-        "enrollment_date": "any_date",
-        "rating": 0,
+        "enrollment_id": enrollment_id,
+        "student_id": student_id,
+        "course": course,
+        "enrollment_date": enrollment_date,
+        "rating": rating,
     }
-
-    if props:
-        enrollment_props.update(props)
 
     return Enrollment(enrollment_props)
