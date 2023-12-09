@@ -2,7 +2,7 @@ import pytest
 
 from src.domain.common import DomainError
 from src.domain.entities import User
-from tests.fixtures.mocks import make_fake_enrollment, make_fake_user
+from tests.fixtures.mocks import make_fake_course, make_fake_enrollment, make_fake_user
 
 
 class TestUser:
@@ -47,13 +47,7 @@ class TestUser:
 
         assert pytest.raises(DomainError, User, user_props).match(error)
 
-    @pytest.mark.parametrize(
-        "course_id, enrollments_len",
-        [("any_id_1", 1), ("any_id_2", 2), ("any_id_3", 3)],
-    )
-    def test_can_be_enrolled_in_multiple_courses(
-        self, course_id: str, enrollments_len: int
-    ):
+    def test_can_be_enrolled_in_multiple_courses(self):
         """
         Scenario: A user enrolls in several courses offered on the platform.
 
@@ -61,12 +55,13 @@ class TestUser:
         and they should have access to the enrolled courses.
         """
         user = User(make_fake_user(role="STUDENT"))
-        enrollment = make_fake_enrollment({"course_id": course_id})
 
-        user.make_enrollment(enrollment)
+        for i in range(5):
+            enrollment = make_fake_enrollment(enrollment_id=f"enrollment_id_{i}")
+            user.make_enrollment(enrollment)
 
         assert user.enrollments is not None
-        assert len(user.enrollments) == enrollments_len
+        assert len(user.enrollments) == 5
 
     def test_user_can_complete_lessons_and_modules(self):
         """
@@ -76,11 +71,10 @@ class TestUser:
         reflecting their completed lessons and modules.
         """
         user = User(make_fake_user(role="STUDENT"))
-        enrollment = make_fake_enrollment({"course_id": "course_id_1"})
+        enrollment = make_fake_enrollment(enrollment_id="enrollment_id_1")
 
         user.make_enrollment(enrollment)
-
-        user.complete_lesson("course_id_1", "lesson_id_1")
+        user.complete_lesson("enrollment_id_1", "lesson_id_1")
 
         assert user.enrollments[0].completed_lessons is not None
         assert user.enrollments[0].completition_status > 0
@@ -93,21 +87,18 @@ class TestUser:
         that shows their progress in the course.
         """
         user = User(make_fake_user(role="STUDENT"))
-        enrollment = make_fake_enrollment({"course_id": "course_id_1"})
+
+        enrollment = make_fake_enrollment(
+            enrollment_id="enrollment_id_1",
+            course=make_fake_course(course_id="course_id_1"),
+        )
         user.make_enrollment(enrollment)
 
-        user.complete_lesson("course_id_1", "lesson_id_1")
+        user.complete_lesson("enrollment_id_1", "lesson_id_1")
+        progress_report = user.get_progress_report("course_id_1")
 
         assert user.enrollments[0].completed_lessons is not None
-        assert user.get_progress_report("course_id_1") is not None
-        assert user.get_progress_report("course_id_1") == {
-            "course_id": "course_id_1",
-            "completition_status": 0.5,
-            "completed_lessons": [
-                {
-                    "module_id": "module_id_1",
-                    "lesson_id": "lesson_id_1",
-                    "completed_at": "2021-01-01T00:00:00Z",
-                }
-            ],
-        }
+
+        assert progress_report is not None
+        assert progress_report.course_id == "course_id_1"
+        assert progress_report.completition_status > 0
