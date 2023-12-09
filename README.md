@@ -1,6 +1,6 @@
 # Learnify
 
-This document provides an overview of the backend for an online course platform application. This is a project for the discipline **Databases** at the **[Federal University of Ouro Preto](https://ufop.br)**.
+Learnify is an online course platform that enables instructors to create and manage online courses, and students to enroll and learn from them. This project aims to develop a robust and scalable backend for the platform. Learnify is a project for the course of **Databases** at the **Federal University of Ouro Preto (UFOP)** in Brazil.
 
 - [Learnify](#learnify)
   - [1. Project Overview](#1-project-overview)
