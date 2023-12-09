@@ -23,8 +23,8 @@ class Entity(ABC, Generic[T]):
         pass
 
     @property
-    def id(self) -> "UniqueEntityID":
-        return self._id
+    def id(self) -> "str":
+        return self._id.id
 
     def getProps(self) -> T:
         return self.props
