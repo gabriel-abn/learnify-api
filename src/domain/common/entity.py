@@ -12,6 +12,10 @@ class UniqueEntityID:
     def equals(self, other: "UniqueEntityID") -> bool:
         return self.id == other.id
 
+    @staticmethod
+    def generate() -> str:
+        return str(uuid4())
+
 
 class Entity(ABC, Generic[T]):
     def __init__(self, props: T, id: Optional[str] = None) -> None:
