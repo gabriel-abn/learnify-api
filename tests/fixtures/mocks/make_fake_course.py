@@ -12,7 +12,7 @@ def make_fake_course(
     name: str = faker.first_name(),
     description: str = faker.text(),
     category: str = faker.word(),
-    price: int = faker.pyint(),
+    price: float = faker.pyint(),
     instructor_id: str = faker.uuid4(),
 ) -> Course:
     course_props: CourseProps = {
@@ -25,7 +25,5 @@ def make_fake_course(
     }
 
     course = Course(course_props)
-
-    course.lessons = ["lesson_id_1", "lesson_id_2", "lesson_id_3"]
 
     return course
