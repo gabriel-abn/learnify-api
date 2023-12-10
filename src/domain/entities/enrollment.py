@@ -13,6 +13,16 @@ class EnrollmentProps(TypedDict):
     rating: float
 
 
+@dataclass
+class ProgressReport:
+    course_id: str
+    completition_status: float
+    completed_lessons: list[str]
+
+    def __str__(self) -> str:
+        return f"Course: {self.course_id} \nStatus: {self.completition_status} \nCompleted lessons: {self.completed_lessons}"
+
+
 class Enrollment(Entity[EnrollmentProps]):
     completed_lessons: list[str]
     completition_status: float
@@ -37,16 +47,9 @@ class Enrollment(Entity[EnrollmentProps]):
             len(self.completed_lessons) / len(self.props["course"].get_all_lessons()), 2
         )
 
-    def get_progress_report(self):
+    def get_progress_report(self) -> ProgressReport:
         return ProgressReport(
             course_id=self.props["course"].props["course_id"],
             completition_status=self.completition_status,
             completed_lessons=self.completed_lessons,
         )
-
-
-@dataclass
-class ProgressReport:
-    course_id: str
-    completition_status: float
-    completed_lessons: list[str]
