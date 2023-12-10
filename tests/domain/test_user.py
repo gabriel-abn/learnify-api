@@ -70,8 +70,22 @@ class TestUser:
         Expected behavior: The user's progress should be tracked and stored correctly,
         reflecting their completed lessons and modules.
         """
+        course = make_fake_course(course_id="course_id_1")
+        course.add_module("Module 1")
+        course.add_lesson(
+            module_id=course.modules[0].module_id,
+            lesson_id="test-lesson-id",
+            title="Test Lesson",
+            description="Test Description",
+            content_type="video",
+            content_url=["Test Video"],
+        )
+
         user = User(make_fake_user(role="STUDENT"))
-        enrollment = make_fake_enrollment(enrollment_id="enrollment_id_1")
+
+        enrollment = make_fake_enrollment(
+            enrollment_id="enrollment_id_1", course=course
+        )
 
         user.make_enrollment(enrollment)
         user.complete_lesson("enrollment_id_1", "lesson_id_1")
@@ -86,12 +100,26 @@ class TestUser:
         Expected behavior: The user should be able to access a progress report
         that shows their progress in the course.
         """
+        course = make_fake_course(course_id="course_id_1")
+
+        course.add_module("Module 1")
+
+        course.add_lesson(
+            module_id=course.modules[0].module_id,
+            lesson_id="test-lesson-id",
+            title="Test Lesson",
+            description="Test Description",
+            content_type="video",
+            content_url=["Test Video"],
+        )
+
         user = User(make_fake_user(role="STUDENT"))
 
         enrollment = make_fake_enrollment(
             enrollment_id="enrollment_id_1",
-            course=make_fake_course(course_id="course_id_1"),
+            course=course,
         )
+
         user.make_enrollment(enrollment)
 
         user.complete_lesson("enrollment_id_1", "lesson_id_1")
