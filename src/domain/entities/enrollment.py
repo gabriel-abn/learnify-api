@@ -14,7 +14,7 @@ class EnrollmentProps(TypedDict):
 
 
 class Enrollment(Entity[EnrollmentProps]):
-    completed_lessons: list
+    completed_lessons: list[str]
     completition_status: float
 
     def __init__(self, props: EnrollmentProps) -> None:
@@ -34,7 +34,7 @@ class Enrollment(Entity[EnrollmentProps]):
         self.completed_lessons.append(lesson_id)
 
         self.completition_status = round(
-            len(self.completed_lessons) / len(self.props["course"].lessons), 2
+            len(self.completed_lessons) / len(self.props["course"].get_all_lessons()), 2
         )
 
     def get_progress_report(self):
@@ -49,4 +49,4 @@ class Enrollment(Entity[EnrollmentProps]):
 class ProgressReport:
     course_id: str
     completition_status: float
-    completed_lessons: list[dict[str, str]]
+    completed_lessons: list[str]
