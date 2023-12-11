@@ -30,5 +30,5 @@ class Entity(ABC, Generic[T]):
     def id(self) -> "str":
         return self._id.id
 
-    def getProps(self) -> T:
+    def get_props(self) -> T:
         return self.props
