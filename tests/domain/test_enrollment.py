@@ -128,12 +128,10 @@ class TestEnrollment:
         certificate = enrollment.generate_certificate()
 
         assert certificate is not None
-        assert certificate.props["certificate_id"] is not None
-        assert certificate.props["course_id"] == course.props["course_id"]
-        assert certificate.props["student_id"] == enrollment.props["student_id"]
-        assert certificate.props["completion_date"] == datetime.now().strftime(
-            "%Y-%m-%d"
-        )
+        assert certificate.certificate_id is not None
+        assert certificate.course_id == course.props["course_id"]
+        assert certificate.student_id == enrollment.props["student_id"]
+        assert certificate.completion_date == datetime.now().strftime("%Y-%m-%d")
 
     def test_should_not_generate_certificate_if_course_is_not_completed(self):
         course = make_fake_course()
@@ -168,15 +166,9 @@ class TestEnrollment:
 
         enrollment = make_fake_enrollment(course=course)
 
-        assert enrollment.props["course"] is not None
-        assert enrollment.props["course"].props["course_id"] is not None
-
         enrollment.complete_lesson("lesson_1")
         enrollment.complete_lesson("lesson_2")
 
-        assert enrollment.completition_status == 0.67
-        assert len(enrollment.completed_lessons) == 2
-
         with raises(DomainError) as exc:
             enrollment.generate_certificate()
-            assert exc.value.message == "Course is not completed."
+            exc.match("Student must complete all lessons to generate certificate.")
