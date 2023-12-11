@@ -17,7 +17,6 @@ class Lesson:
 
 @dataclass
 class Module:
-    lesson_id: str = field(init=False)
     module_id: str = field(init=False)
     title: str
     course_id: str
@@ -45,10 +44,9 @@ class Course(Entity[CourseProps]):
         if props["price"] < 0:
             raise DomainError("Invalid price")
 
+        self.modules = [Module(title=props["name"], course_id=props["course_id"])]
+
         self.props = props
-        self.modules = [
-            Module(title=self.props["name"], course_id=self.props["course_id"])
-        ]
 
     def equals(self, object: Entity) -> bool:
         return super().equals(object)
