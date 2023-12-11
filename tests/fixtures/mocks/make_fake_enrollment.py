@@ -11,14 +11,12 @@ def make_fake_enrollment(
     enrollment_id: str = faker.uuid4(),
     student_id: str = faker.uuid4(),
     course: Course = make_fake_course(),
-    enrollment_date: str = faker.date_object(),
     rating: int = faker.pyint(),
 ) -> Enrollment:
     enrollment_props: EnrollmentProps = {
         "enrollment_id": enrollment_id,
         "student_id": student_id,
         "course": course,
-        "enrollment_date": enrollment_date,
         "rating": rating,
     }
 
