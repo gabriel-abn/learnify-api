@@ -20,19 +20,19 @@ class TestEnrollment:
     def test_should_not_create_enrollment_with_empty_props(self):
         with raises(DomainError) as exc:
             make_fake_enrollment(student_id="")
-            assert exc.value.message == "Enrollment must have Student ID"
+
+        assert exc.value.message == "Enrollment must have Student ID"
 
         with raises(DomainError) as exc:
             make_fake_enrollment(enrollment_id="")
-            assert exc.value.message == "Enrollment must have Student ID"
+
+        assert exc.value.message == "Enrollment must have base ID"
 
     def test_should_assing_enrollment_date(self):
         enrollment = make_fake_enrollment()
 
-        assert enrollment.props["enrollment_date"] is not None
-        assert enrollment.props["enrollment_date"] == datetime.now().strftime(
-            "%Y-%m-%d"
-        )
+        assert enrollment.enrollment_date is not None
+        assert enrollment.enrollment_date == datetime.now().strftime("%d/%m/%Y %H:%M")
 
     def test_should_have_a_valid_course(self):
         enrollment = make_fake_enrollment()
