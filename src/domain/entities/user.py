@@ -35,7 +35,7 @@ class User(Entity[UserProps]):
         if not props["last_name"].isalpha():
             raise DomainError("Invalid last name")
 
-        self.props = props
+        super().__init__(props)
         self.enrollments = []
 
     def equals(self, object: Entity) -> bool:

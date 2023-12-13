@@ -49,7 +49,7 @@ class Enrollment(Entity[EnrollmentProps]):
             raise DomainError("Enrollment must have Student ID")
 
         self._id = UniqueEntityID(props["enrollment_id"])
-        self.props = props
+        super().__init__(props)
 
         self.completed_lessons = []
         self.completition_status = 0
