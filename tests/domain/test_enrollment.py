@@ -32,7 +32,9 @@ class TestEnrollment:
         enrollment = make_fake_enrollment()
 
         assert enrollment.enrollment_date is not None
-        assert enrollment.enrollment_date == datetime.now().strftime("%d/%m/%Y %H:%M")
+        assert enrollment.enrollment_date.strftime(
+            "%Y-%m-%d"
+        ) == datetime.now().strftime("%Y-%m-%d")
 
     def test_should_have_a_valid_course(self):
         enrollment = make_fake_enrollment()

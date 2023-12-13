@@ -36,7 +36,7 @@ class ConclusionCertificate:
 class Enrollment(Entity[EnrollmentProps]):
     completed_lessons: list[str]
     completition_status: float
-    enrollment_date: str
+    enrollment_date: datetime
 
     def __init__(self, props: EnrollmentProps) -> None:
         if not props:
@@ -53,7 +53,7 @@ class Enrollment(Entity[EnrollmentProps]):
 
         self.completed_lessons = []
         self.completition_status = 0
-        self.enrollment_date = datetime.now().strftime("%d/%m/%Y %H:%M")
+        self.enrollment_date = datetime.now()
 
     def equals(self, object: Entity) -> bool:
         return isinstance(object, Enrollment) and object.id == self.id
