@@ -46,7 +46,7 @@ class Course(Entity[CourseProps]):
 
         self.modules = [Module(title=props["name"], course_id=props["course_id"])]
 
-        super().__init__(props)
+        super().__init__(props, props["course_id"] if props["course_id"] else None)
 
     def equals(self, object: Entity) -> bool:
         return super().equals(object)

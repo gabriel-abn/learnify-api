@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import TypedDict
 
-from src.domain.common import DomainError, Entity, UniqueEntityID
+from src.domain.common import DomainError, Entity
 from src.domain.entities import Course
 
 
@@ -48,8 +48,10 @@ class Enrollment(Entity[EnrollmentProps]):
         if props["student_id"] == "":
             raise DomainError("Enrollment must have Student ID")
 
-        self._id = UniqueEntityID(props["enrollment_id"])
-        super().__init__(props)
+        super().__init__(
+            props,
+            props["enrollment_id"] if props["enrollment_id"] else None,
+        )
 
         self.completed_lessons = []
         self.completition_status = 0
