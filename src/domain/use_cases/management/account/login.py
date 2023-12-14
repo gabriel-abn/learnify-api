@@ -1,13 +1,13 @@
 from abc import abstractmethod
-from typing import TypedDict
+from typing import Required, TypedDict
 
 from src.domain.common.use_case import UseCase
 
 
-class LoginParams(TypedDict):
+class LoginParams(TypedDict, total=False):
     username: str
     email: str
-    password: str
+    password: Required[str]
 
 
 class LoginResult(TypedDict):
