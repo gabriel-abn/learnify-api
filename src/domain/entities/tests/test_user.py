@@ -2,7 +2,7 @@ import pytest
 
 from src.domain.common import DomainError
 from src.domain.entities import User
-from tests.fixtures.mocks import make_fake_course, make_fake_enrollment, make_fake_user
+from tests.mocks import make_fake_course, make_fake_enrollment, make_fake_user
 
 
 class TestUser:

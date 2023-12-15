@@ -3,8 +3,7 @@ from datetime import datetime
 from pytest import raises
 
 from src.domain.common.domain_error import DomainError
-from tests.fixtures.mocks.make_fake_course import make_fake_course
-from tests.fixtures.mocks.make_fake_enrollment import make_fake_enrollment
+from tests.mocks import make_fake_course, make_fake_enrollment
 
 
 class TestEnrollment:

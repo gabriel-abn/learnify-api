@@ -10,7 +10,7 @@ from src.application.use_cases.management.account.register_user_use_case import 
 from src.domain.common.domain_error import DomainError
 from src.domain.entities.user import User
 from src.domain.use_cases.management.account import RegisterUser
-from tests.fixtures.mocks.make_fake_user import make_fake_user
+from tests.mocks import make_fake_user
 
 
 class TestRegisterUser:

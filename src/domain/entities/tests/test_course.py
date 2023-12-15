@@ -1,7 +1,7 @@
 import pytest
 
 from src.domain.common.domain_error import DomainError
-from tests.fixtures.mocks.make_fake_course import make_fake_course
+from tests.mocks import make_fake_course
 
 
 class TestCourse:

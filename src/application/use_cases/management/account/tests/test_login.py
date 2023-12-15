@@ -11,7 +11,7 @@ from src.application.use_cases.management.account.login_use_case import (
 )
 from src.domain.entities.user import User
 from src.domain.use_cases.management.account.login import Login
-from tests.fixtures.mocks import make_fake_user
+from tests.mocks import make_fake_user
 
 
 class TestLogin:
