@@ -99,7 +99,7 @@ class Course(Entity[CourseProps]):
                 module.lessons.append(lesson)
                 break
         else:
-            raise DomainError("Module not found")
+            raise DomainError("Module not found.")
 
     def remove_lesson(self, module_id: str, lesson_id: str) -> None:
         for module in self.modules:
@@ -109,7 +109,7 @@ class Course(Entity[CourseProps]):
                 ]
                 break
         else:
-            raise DomainError("Module not found")
+            raise DomainError("Module not found.")
 
     def update_lesson(
         self,
@@ -131,7 +131,7 @@ class Course(Entity[CourseProps]):
                         break
                 break
         else:
-            raise DomainError("Module not found")
+            raise DomainError("Module not found.")
 
     def get_lesson(self, module_id: str, lesson_id: str) -> Lesson:
         for module in self.modules:
@@ -140,7 +140,7 @@ class Course(Entity[CourseProps]):
                     if lesson.lesson_id == lesson_id:
                         return lesson
         else:
-            raise DomainError("Module not found")
+            raise DomainError("Module not found.")
 
     def get_all_lessons(self) -> list[Lesson]:
         lessons = []
