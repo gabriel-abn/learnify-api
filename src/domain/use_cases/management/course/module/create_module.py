@@ -11,7 +11,7 @@ class CreateModuleParams(TypedDict):
 
 
 class CreateModuleResult(TypedDict):
-    id: str
+    module_id: str
     course_id: str
     position: int
 
