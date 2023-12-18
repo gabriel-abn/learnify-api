@@ -1,7 +1,7 @@
 from faker import Faker
 
 from src.domain.entities import Course, Enrollment, EnrollmentProps
-from tests.fixtures.mocks import make_fake_course
+from tests.mocks import make_fake_course
 
 faker = Faker()
 
