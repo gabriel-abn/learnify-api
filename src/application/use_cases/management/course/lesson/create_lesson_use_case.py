@@ -1,4 +1,4 @@
-from src.application.common import ApplicationError
+from src.application.common import COURSE_NOT_FOUND, ApplicationError
 from src.application.repositories import ICourseRepository, ILessonRepository
 from src.domain.common.entity import UniqueEntityID
 from src.domain.use_cases.management.course.lesson.create_lesson import (
@@ -6,8 +6,6 @@ from src.domain.use_cases.management.course.lesson.create_lesson import (
     CreateLessonParams,
     CreateLessonResult,
 )
-
-COURSE_NOT_FOUND = "COURSE_NOT_FOUND", "Course not found."
 
 
 class CreateLessonUseCase(CreateLesson):
